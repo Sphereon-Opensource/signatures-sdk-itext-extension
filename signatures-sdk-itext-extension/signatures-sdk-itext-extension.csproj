@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Signatures.SDK</RootNamespace>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>sphereon-$(AssemblyName)</PackageId>
+    <Authors>spostma</Authors>
+    <Company>Sphereon</Company>
+    <Description>iText extension for eIDAS Advanced Electronic Signature Client for .NET</Description>
+    <Copyright>2023 Sphereon B.V.</Copyright>
+    <PackageProjectUrl>https://www.nuget.org/packages/signatures-sdk-itext-extension</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Sphereon-Opensource/signatures-sdk-itext-extension</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Version>0.0.1</Version>
+  </PropertyGroup>
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>False</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Optimize>False</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="itext7" Version="7.2.5" />
+    <PackageReference Include="sphereon-signatures-sdk" Version="1.1.1" />
+  </ItemGroup>
+
+</Project>
