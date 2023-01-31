@@ -22,11 +22,11 @@ namespace signatures_sdk_itext_extension
         private readonly SignatureConfigApi configApi;
         private readonly SigningApi signingApi;
 
-        public ITextSigningOneShotApi(KeysApi keysApi, SignatureConfigApi configApi, SigningApi signingApi)
+        public ITextSigningOneShotApi(SigningApi signingApi, SignatureConfigApi configApi, KeysApi keysApi)
         {
-            this.keysApi = keysApi;
-            this.configApi = configApi;
             this.signingApi = signingApi;
+            this.configApi = configApi;
+            this.keysApi = keysApi;
         }
 
         public SignOutput Sign(DetermineSignInput determineSignInput)
@@ -56,8 +56,9 @@ namespace signatures_sdk_itext_extension
             );
 
             // Sign the document using the detached mode, CMS or CAdES equivalent.
-            var remoteSigner = new RemoteSignerOneShot(config.DigestAlgorithm ?? DigestAlgorithm.SHA256, signingApi, signInput);
-            var tsaClient = new TSAClientBouncyCastle(config.TimestampParameters.TsaUrl);
+            DigestAlgorithm digestAlgorithm = config.DigestAlgorithm ?? DigestAlgorithm.SHA256;
+            var remoteSigner = new RemoteSignerOneShot(digestAlgorithm, signingApi, signInput);
+            var tsaClient = new TSAClientBouncyCastle(config.TimestampParameters.TsaUrl, null, null, TSAClientBouncyCastle.DEFAULTTOKENSIZE, digestAlgorithm.ToString());
             OCSPVerifier ocspVerifier = new OCSPVerifier(null, null);
             IOcspClient ocspClient = new OcspClientBouncyCastle(ocspVerifier);
             ICrlClient crlClient = new CrlClientOnline(certificateWrappers.ToArray());

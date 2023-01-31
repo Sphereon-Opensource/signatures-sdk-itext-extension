@@ -37,7 +37,7 @@ namespace test_signatures_sdk_itext
             }
 
             this.apiFactory = new ApiFactory(signaturesSdkConfig, loginResult.IdentityToken, signaturesSdkConfig.ServiceEndpoint);
-            this.iTextSigningApi = new ITextSigningOneShotApi(apiFactory.KeysApi, apiFactory.SignatureConfigApi, apiFactory.SigningApi);
+            this.iTextSigningApi = new ITextSigningOneShotApi(apiFactory.SigningApi, apiFactory.SignatureConfigApi, apiFactory.KeysApi);
         }
 
         [TestMethod]
@@ -52,6 +52,28 @@ namespace test_signatures_sdk_itext
         {
             TestCreateConfigs(SignatureLevel.PKCS7LT);
             TestSign("pkcs7");
+        }
+
+        private void TestSign(string label)
+        {
+            string inputFilePath = $"resources\\{TestPdfName}";
+            string outputFilePath = $"{Path.GetTempPath()}\\{SignedPdfName}".Replace(".pdf", label + ".pdf", StringComparison.InvariantCultureIgnoreCase);
+
+
+            // Create a signInput object
+            var origData = ApiUtils.CreateOrigData(new FileInfo(inputFilePath));
+            var determineSignInput = new DetermineSignInput(
+                origData: origData,
+                signMode: SignMode.DOCUMENT,
+                new ConfigKeyBinding(CertificateAlias, signatureConfigId, keyProviderId)
+                );
+            var signOutput = iTextSigningApi.Sign(determineSignInput);
+
+            // Write result PDF to %temp%
+            using (var outputStream = File.Create(outputFilePath))
+            {
+                outputStream.Write(signOutput.Value);
+            }
         }
 
         public void TestCreateConfigs(SignatureLevel signatureLevel)
@@ -113,29 +135,6 @@ namespace test_signatures_sdk_itext
             using (var certStream = File.OpenWrite($"{Path.GetTempPath()}\\{CertificateAlias}.cer"))
             {
                 certStream.Write(key.KeyEntry.Certificate.Value);
-            }
-        }
-
-
-        private void TestSign(string label)
-        {
-            string inputFilePath = $"resources\\{TestPdfName}";
-            string outputFilePath = $"{Path.GetTempPath()}\\{SignedPdfName}".Replace(".pdf", label + ".pdf", StringComparison.InvariantCultureIgnoreCase);
-
-
-            // Create a signInput object
-            var origData = ApiUtils.CreateOrigData(new FileInfo(inputFilePath));
-            var determineSignInput = new DetermineSignInput(
-                origData: origData,
-                signMode: SignMode.DOCUMENT,
-                new ConfigKeyBinding(CertificateAlias, signatureConfigId, keyProviderId)
-                );
-            var signOutput = iTextSigningApi.Sign(determineSignInput);
-
-            // Write result PDF to %temp%
-            using (var outputStream = File.Create(outputFilePath))
-            {
-                outputStream.Write(signOutput.Value);
             }
         }
 
