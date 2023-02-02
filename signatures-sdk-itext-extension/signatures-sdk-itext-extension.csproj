@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Signatures.SDK</RootNamespace>
+    <RootNamespace>Signatures.SDK.IText</RootNamespace>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>sphereon-$(AssemblyName)</PackageId>
     <Authors>spostma</Authors>

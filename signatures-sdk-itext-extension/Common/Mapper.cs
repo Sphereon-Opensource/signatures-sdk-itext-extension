@@ -1,15 +1,13 @@
 ﻿using iText.Signatures;
 using Sphereon.SDK.Signatures.Model;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Signatures.SDK
+namespace Signatures.SDK.Common
 {
     internal class Mapper
     {
 
-        internal static PadesSignatureFormParameters GetFormParameters(SignatureFormParameters signatureFormParameters, SignatureFormParameters signatureFormParametersOverride)
+        internal static PadesSignatureFormParameters GetFormParameters(SignatureFormParameters signatureFormParameters, SignatureFormParameters signatureFormParametersOverride = null)
         {
             var config = signatureFormParameters.PadesSignatureFormParameters;
             var overrd = signatureFormParametersOverride?.PadesSignatureFormParameters;
@@ -47,6 +45,19 @@ namespace Signatures.SDK
             }
 
             return subfilter;
+        }
+
+        internal static string GetEncryptionAlgorithm(SignatureAlgorithm algorithm)
+        {
+            if (algorithm.ToString().Contains("RSA"))
+            {
+                return "RSA";
+            }
+            else if (algorithm.ToString().Contains("DSA"))
+            {
+                return "DSA";
+            }
+            throw new ArgumentOutOfRangeException(nameof(algorithm));
         }
     }
 }

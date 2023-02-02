@@ -4,9 +4,9 @@ using Sphereon.SDK.Signatures.Model;
 using System;
 using System.IO;
 
-namespace signatures_sdk_itext_extension
+namespace Signatures.SDK.IText.OneShot
 {
-    internal class RemoteSignerOneShot : IExternalSignature
+    internal class RemoteOneShotSigner : IExternalSignature
     {
         private DigestAlgorithm digestAlgorithm;
         private readonly SigningApi signingApi;
@@ -14,7 +14,7 @@ namespace signatures_sdk_itext_extension
 
         public Signature Signature { get; internal set; }
 
-        public RemoteSignerOneShot(DigestAlgorithm digestAlgorithm, SigningApi signingApi, SignInput signInput)
+        public RemoteOneShotSigner(DigestAlgorithm digestAlgorithm, SigningApi signingApi, SignInput signInput)
         {
             this.digestAlgorithm = digestAlgorithm;
             this.signingApi = signingApi;
