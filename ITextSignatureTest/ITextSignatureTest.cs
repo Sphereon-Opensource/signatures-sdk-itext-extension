@@ -1,11 +1,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signatures.SDK;
 using Signatures.SDK.IText.Config;
-using Signatures.SDK.IText.TwoPhase;
+using Signatures.SDK.IText.API;
 using Sphereon.SDK.Signatures.Model;
 using System;
 using System.IO;
-using System.Security.Cryptography.X509Certificates;
 
 namespace test_signatures_sdk_itext
 {
@@ -23,19 +22,6 @@ namespace test_signatures_sdk_itext
             ConfigProvider configProvider = CreateTestConfigs(Mode.ONLINE, SignatureLevel.PAdESBASELINELT);
             var iTextSigningApi = new ITextSigningApi(configProvider);
             TestSign("pades", iTextSigningApi);
-
-            var getKeyResponse = apiFactory.KeysApi.GetKey(keyProviderId, CertificateAlias);
-
-            int i = 0;
-            getKeyResponse.KeyEntry.CertificateChain.ForEach(cert =>
-            {
-                var certificate = new X509Certificate(cert.Value);
-                using (var certStream = File.OpenWrite($"{Path.GetTempPath()}\\chain-{i}.cer"))
-                {
-                    certStream.Write(cert.Value);
-                    i++;
-                }
-            });
         }
 
         [TestMethod]

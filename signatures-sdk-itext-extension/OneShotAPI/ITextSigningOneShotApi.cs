@@ -11,7 +11,7 @@ using Signatures.SDK.IText.Common;
 using Signatures.SDK.Common;
 using Signatures.SDK.IText.Config;
 
-namespace Signatures.SDK.IText.OneShot
+namespace Signatures.SDK.IText.OneShotAPI
 {
     public class ITextSigningOneShotApi : AbstractConfigurer
     {

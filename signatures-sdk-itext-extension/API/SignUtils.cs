@@ -67,7 +67,7 @@ using Org.BouncyCastle.Utilities.Collections;
 using Org.BouncyCastle.X509;
 using X509Certificate = Org.BouncyCastle.X509.X509Certificate;
 using X509Extension = Org.BouncyCastle.Asn1.X509.X509Extension;
-namespace Signatures.SDK.IText.TwoPhase
+namespace Signatures.SDK.IText.API
 {
     internal sealed class SignUtils
     {

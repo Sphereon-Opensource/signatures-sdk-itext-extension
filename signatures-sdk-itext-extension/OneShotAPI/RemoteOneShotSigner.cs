@@ -4,7 +4,7 @@ using Sphereon.SDK.Signatures.Model;
 using System;
 using System.IO;
 
-namespace Signatures.SDK.IText.OneShot
+namespace Signatures.SDK.IText.OneShotAPI
 {
     internal class RemoteOneShotSigner : IExternalSignature
     {

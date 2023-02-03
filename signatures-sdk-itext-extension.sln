@@ -5,7 +5,12 @@ VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "signatures-sdk-itext-extension", "signatures-sdk-itext-extension\signatures-sdk-itext-extension.csproj", "{72155220-38BD-4ABF-88BC-F1D1B7B4C5D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "signatures-sdk-itext-tests", "ITextSignatureTest\signatures-sdk-itext-tests.csproj", "{FB68DD69-9E48-4551-B65F-A921456757DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "signatures-sdk-itext-tests", "ITextSignatureTest\signatures-sdk-itext-tests.csproj", "{FB68DD69-9E48-4551-B65F-A921456757DC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5AD45E2A-E20A-45AB-8A85-4B9D1CDDEF45}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

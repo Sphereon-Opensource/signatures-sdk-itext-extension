@@ -10,7 +10,7 @@ using Org.BouncyCastle.Crypto;
 using Sphereon.SDK.Signatures.Model;
 using System.Diagnostics.Contracts;
 using Signatures.SDK.Model;
-using Signatures.SDK.IText.TwoPhase;
+using Signatures.SDK.IText.API;
 using Signatures.SDK.Common;
 
 namespace Signatures.SDK.TwoPhase

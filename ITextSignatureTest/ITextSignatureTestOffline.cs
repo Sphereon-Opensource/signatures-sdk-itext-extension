@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Signatures.SDK;
 using Signatures.SDK.IText.Config;
-using Signatures.SDK.IText.TwoPhase;
+using Signatures.SDK.IText.API;
 using Sphereon.SDK.Signatures.Model;
 using System;
 using System.Collections.Generic;

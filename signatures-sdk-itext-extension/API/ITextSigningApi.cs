@@ -14,7 +14,7 @@ using Signatures.SDK.Common;
 using Signatures.SDK.Model;
 using Signatures.SDK.IText.Config;
 
-namespace Signatures.SDK.IText.TwoPhase
+namespace Signatures.SDK.IText.API
 {
     public class ITextSigningApi : AbstractConfigurer
     {

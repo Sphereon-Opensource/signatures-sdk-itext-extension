@@ -56,17 +56,7 @@ namespace Signatures.SDK.IText.Common
 
                 if (visualp.BackgroundColor != null && fieldp != null && fieldp.Width != 0 && fieldp.Height != 0)
                 {
-                    Bitmap bmp = new Bitmap((int)fieldp.Width, (int)fieldp.Height);
-                    using (Graphics g = Graphics.FromImage(bmp))
-                    {
-                        g.Clear(System.Drawing.Color.Yellow);
-                    }
-
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);                        
-                        appearance.SetImage(ImageDataFactory.Create(ms.ToArray()));
-                    }
+                    ApplyBackgroundFill(appearance, fieldp);
                 }
             }
 
@@ -74,5 +64,19 @@ namespace Signatures.SDK.IText.Common
             signer.SetSignDate(signingDate.DateTime);
         }
 
+        private static void ApplyBackgroundFill(PdfSignatureAppearance appearance, VisualSignatureFieldParameters fieldp)
+        {
+            Bitmap bmp = new Bitmap((int)fieldp.Width, (int)fieldp.Height);
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                g.Clear(System.Drawing.Color.Yellow);
+            }
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+                appearance.SetImage(ImageDataFactory.Create(ms.ToArray()));
+            }
+        }
     }
 }
