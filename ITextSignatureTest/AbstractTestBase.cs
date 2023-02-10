@@ -20,18 +20,27 @@ namespace test_signatures_sdk_itext
         protected string? signatureConfigId;
         protected string? keyProviderId;
 
-        public AbstractTestBase()
+        public AbstractTestBase(bool clientCredentialsOnly = false)
         {
             var signaturesSdkConfig = SignaturesSdkConfig.FromEnvironment();
 
             var authnApi = new AuthnApi(signaturesSdkConfig);
-            this.loginResult = authnApi.LoginFromDesktop().GetAwaiter().GetResult();
-            if (loginResult.IsError)
-            {
-                throw new Exception(loginResult.Error);
-            }
 
-            this.apiFactory = new ApiFactory(signaturesSdkConfig, loginResult.IdentityToken, signaturesSdkConfig.ServiceEndpoint);
+            string token;
+            if (clientCredentialsOnly)
+            {
+                token = authnApi.LoginUsingClientCredentialsOnly().GetAwaiter().GetResult();
+            }
+            else
+            {
+                this.loginResult = authnApi.LoginFromDesktop().GetAwaiter().GetResult();
+                if (loginResult.IsError)
+                {
+                    throw new Exception(loginResult.Error);
+                }
+                token = loginResult.IdentityToken;
+            }
+            this.apiFactory = new ApiFactory(signaturesSdkConfig, token, signaturesSdkConfig.ServiceEndpoint);
         }
 
 

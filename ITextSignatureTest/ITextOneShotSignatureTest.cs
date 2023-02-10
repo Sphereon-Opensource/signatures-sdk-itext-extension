@@ -12,9 +12,15 @@ namespace test_signatures_sdk_itext
     [TestClass]
     public class ITextOneShotSignatureTest : AbstractTestBase
     {
+
+
         private const string TestPdfName = "test-unsigned.pdf";
         private const string SignedPdfName = "test-signed.pdf";
 
+        public ITextOneShotSignatureTest() : base(true)
+        {
+            // Don't login interactively
+        }
 
         [TestMethod]
         public void TestPades()
