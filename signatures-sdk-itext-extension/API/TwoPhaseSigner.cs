@@ -30,7 +30,7 @@ namespace Signatures.SDK.TwoPhase
         public Stream OutputStream { get; }
 
         public PdfSignerState GetDataToSign(X509Certificate[] chain, ICollection<ICrlClient> crlList, IOcspClient ocspClient, int estimatedSize,
-            CryptoStandard sigtype, SignatureLevel signatureLevel, DigestAlgorithm digestAlgorithm)
+            CryptoStandard sigtype, SignatureLevel signatureLevel, DigestAlgorithm digestAlgorithm, string signerName)
         {
             if (closed)
             {
@@ -78,6 +78,7 @@ namespace Signatures.SDK.TwoPhase
             PdfSignature dic = new PdfSignature(PdfName.Adobe_PPKLite, sigtype == PdfSigner.CryptoStandard.CADES 
                 ? PdfName.ETSI_CAdES_DETACHED 
                 : PdfName.Adbe_pkcs7_detached);
+            dic.SetName(signerName);
             dic.SetReason(appearance.GetReason());
             dic.SetLocation(appearance.GetLocation());
             dic.SetSignatureCreator(appearance.GetSignatureCreator());

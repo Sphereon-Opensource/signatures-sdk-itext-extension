@@ -50,7 +50,7 @@ namespace Signatures.SDK.IText.API
             IOcspClient ocspClient = new OcspClientBouncyCastle(ocspVerifier);
 
             // Sign the document using the detached mode, CMS or CAdES equivalent.
-            var state = signer.GetDataToSign(certificateChain.ToArray(), lstCRL, ocspClient, 0, Mapper.GetSubfilter(config), config.SignatureLevel, digestAlgorithm);
+            var state = signer.GetDataToSign(certificateChain.ToArray(), lstCRL, ocspClient, 0, Mapper.GetSubfilter(config), config.SignatureLevel, digestAlgorithm, formParameters.SignerName);
 
             // Construct result
             var signInput = new SignInput

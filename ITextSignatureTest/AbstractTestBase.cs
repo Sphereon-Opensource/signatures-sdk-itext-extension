@@ -11,7 +11,7 @@ namespace test_signatures_sdk_itext
 {
     public abstract class AbstractTestBase
     {
-        protected const string CertificateAlias = "esignum";
+        protected const string CertificateAlias = "rdw-pdf-signatures";
 
         private readonly LoginResult loginResult;
         protected readonly ApiFactory apiFactory;
@@ -48,9 +48,9 @@ namespace test_signatures_sdk_itext
         {
             // Create a signature configuration
             SignatureFormParameters formParams = new(new PadesSignatureFormParameters(
-                signerName: "Unit Test <test@sphereon.com>",
-                reason: "E-signed by Unit Test <test@sphereon.com> , Testing!!",
-                location: "My JVM",
+                signerName: "RDW Signer Name",
+                reason: "RDW",
+                location: "Groningen, Nederland",
                 mode: PdfSignatureMode.CERTIFICATION
                 ));
 
@@ -73,9 +73,10 @@ namespace test_signatures_sdk_itext
                             signatureFormParameters: formParams,
                             accessRestrictions: restrictions,
                             digestAlgorithm: DigestAlgorithm.SHA256,
-                            timestampParameters: new TimestampParameters(tsaUrl: "http://timestamp.sectigo.com/",
+                            timestampParameters: new TimestampParameters(tsaUrl: "http://timestamping.ensuredca.com/",
                                 baselineLTAArchiveTimestampParameters: new TimestampParameterSettings(digestAlgorithm: DigestAlgorithm.SHA256,
                                 timestampContainerForm: TimestampContainerForm.PDF)));
+
 
             // Create a key/certificate provider configuration
             CreateKeyProvider createKeyProvider = new CreateKeyProvider(
@@ -83,9 +84,9 @@ namespace test_signatures_sdk_itext
                                     cacheTTLInSeconds: 24 * 60 * 60,
                                     type: KeyProviderType.AZUREKEYVAULT,
                                     azureKeyvaultSettings: new AzureKeyvaultSetting(
-                                        keyvaultUrl: "https://sphereon-certs.vault.azure.net/",
+                                        keyvaultUrl: "https://rdw.vault.azure.net/",
                                         tenantId: "e2a42b2f-7460-4499-afc2-425315ef058a",
-                                        applicationId: "demo",
+                                        applicationId: "eidsas-signature-ms",
                                         credentialOpts: GetAzureCredetials()
                                         )
                                     );

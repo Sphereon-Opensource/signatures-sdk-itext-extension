@@ -52,7 +52,7 @@ namespace test_signatures_sdk_itext
             var determineSignInput = new DetermineSignInput(
                 origData: origData,
                 signMode: SignMode.DOCUMENT,
-                new ConfigKeyBinding(CertificateAlias, "", keyProviderId)
+                new ConfigKeyBinding(CertificateAlias, "", "388261db-a88e-409b-92c6-22b711be8fd1")
                 );
             var signInputResponse = iTextSigningApi.DetermineSignInput(determineSignInput);
 
