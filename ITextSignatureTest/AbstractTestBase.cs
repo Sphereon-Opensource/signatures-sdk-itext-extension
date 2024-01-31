@@ -84,9 +84,9 @@ namespace test_signatures_sdk_itext
                                     cacheTTLInSeconds: 24 * 60 * 60,
                                     type: KeyProviderType.AZUREKEYVAULT,
                                     azureKeyvaultSettings: new AzureKeyvaultSetting(
-                                        keyvaultUrl: "https://rdw.vault.azure.net/",
-                                        tenantId: "e2a42b2f-7460-4499-afc2-425315ef058a",
-                                        applicationId: "eidsas-signature-ms",
+                                        keyvaultUrl: GetAzureKeyvaultUrl(),
+                                        tenantId: GetAzureTenantId(),
+                                        applicationId: GetAzureApplicationId(),
                                         credentialOpts: GetAzureCredetials()
                                         )
                                     );
@@ -180,6 +180,41 @@ namespace test_signatures_sdk_itext
 
             return clientSecret;
         }
+
+        private static string GetAzureKeyvaultUrl()
+        {
+            string? keyvaultUrl = Environment.GetEnvironmentVariable("SIGNATURES_SDK_AZURE_KEYVAULT_URL");
+            if (keyvaultUrl == null)
+            {
+                throw new Exception("Environment variable SIGNATURES_SDK_AZURE_KEYVAULT_URL is required to run this test");
+            }
+
+            return keyvaultUrl;
+        }
+
+        private static string GetAzureTenantId()
+        {
+            string? tenantId = Environment.GetEnvironmentVariable("SIGNATURES_SDK_AZURE_TENANT_ID");
+            if (tenantId == null)
+            {
+                throw new Exception("Environment variable SIGNATURES_SDK_AZURE_TENANT_ID is required to run this test");
+            }
+
+            return tenantId;
+        }
+
+        private static string GetAzureApplicationId()
+        {
+            string? tenantId = Environment.GetEnvironmentVariable("SIGNATURES_SDK_AZURE_TENANT_ID");
+            if (tenantId == null)
+            {
+                throw new Exception("Environment variable SIGNATURES_SDK_AZURE_TENANT_ID is required to run this test");
+            }
+
+            return tenantId;
+        }
+
+
 
         public enum Mode { ONLINE, OFFLINE }
     }
