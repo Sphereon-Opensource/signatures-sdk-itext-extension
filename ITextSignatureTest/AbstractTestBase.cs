@@ -205,10 +205,10 @@ namespace test_signatures_sdk_itext
 
         private static string GetAzureApplicationId()
         {
-            string? tenantId = Environment.GetEnvironmentVariable("SIGNATURES_SDK_AZURE_TENANT_ID");
+            string? tenantId = Environment.GetEnvironmentVariable("SIGNATURES_SDK_AZURE_APP_ID");
             if (tenantId == null)
             {
-                throw new Exception("Environment variable SIGNATURES_SDK_AZURE_TENANT_ID is required to run this test");
+                throw new Exception("Environment variable SIGNATURES_SDK_AZURE_APP_ID is required to run this test");
             }
 
             return tenantId;
